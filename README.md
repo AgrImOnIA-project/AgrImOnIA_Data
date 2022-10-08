@@ -10,7 +10,7 @@ Program language varies according to the preference of who has worked on it.
 
 
 --> help:
-From the guide of GitHub on how wirte a README:
+From the guide of GitHub on how write a README:
 1. What is this repo or project?
 2. How does it work?
 3. Who will use this repo or project?
