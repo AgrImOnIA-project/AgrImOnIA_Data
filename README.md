@@ -8,7 +8,7 @@ The AgrImOnIA dataset is a comprehensive dataset relating air quality and livest
 
 Air Quality and Livestock data are pre-processed using MATALAB. Weather, Emissions and Land data are pre-processed using R as well as the spatial interpolations and the final merging.
 
-Program language varies according to the preference of who has worked on it.
+Programming language varies according to the preference of who has worked on it.
 
 # Building steps
 
