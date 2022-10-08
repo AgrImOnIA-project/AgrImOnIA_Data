@@ -3,7 +3,6 @@
 These scripts are used in the AgrImOnIA_Dataset building process.
 
 Air Quality and Livestock data are pre-processed using MATALAB.
-
 Weather, Emissions and Land data are pre-processed using R.
 
 The interpolation between the datasets and the final merging are made in R.
