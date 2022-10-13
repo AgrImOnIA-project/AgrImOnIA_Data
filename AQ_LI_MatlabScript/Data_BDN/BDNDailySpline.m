@@ -11,8 +11,8 @@ proj = info.CoordinateReferenceSystem;
 %% Import BDN data 
 % Read shape file 
 
-Suini  = shaperead("Input/ShapeFile_Suini/Suini.shp");
-Bovini = shaperead("Input/ShapeFile_Bovini/Bovini.shp"); 
+Suini  = shaperead("pigs.shp");
+Bovini = shaperead("bovines.shp"); 
 
 %% Import ARPA end Buffer stations
 load('../Data_AQ/Input/Anagrafica.mat');
