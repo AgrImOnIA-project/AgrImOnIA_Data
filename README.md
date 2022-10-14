@@ -12,10 +12,10 @@ Programming language varies according to the preference of who has worked on it.
 
 These scripts are used in the AgrImOnIA_Dataset building process. In particular:
 
-<ol>
-<li>item1<\li>
-<li>item1<\li>
-<\ol>
+<ul>
+<li>item1</li>
+<li>item1</li>
+</ul>
 
 # Building steps
 
