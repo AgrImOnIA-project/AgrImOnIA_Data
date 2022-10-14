@@ -1,4 +1,4 @@
-# What is Agrimonia dataset?
+# Agrimonia dataset
 
 The AgrImOnIA dataset is a comprehensive dataset relating air quality and livestock (expressed as the density of bovines and swine bred) along with weather and other variables. This dataset is a collection of estimated daily values for a range of measurements of different dimensions as: air quality, meteorology, emissions, livestock animals and land use. Data are related to Lombardy and the surrounding area for 2016-2021, inclusive. The surrounding area is obtained by applying a 0.3° buffer on Lombardy borders. The data uses several aggregation and interpolation methods to estimate the measurement for all days. 
 
