@@ -10,7 +10,14 @@ Programming language varies according to the preference of who has worked on it.
 
 # Repositery overview
 
-These scripts are used in the AgrImOnIA_Dataset building process.
+These scripts are used in the AgrImOnIA_Dataset building process. In particular:
+<ul>
+<li>
+item1
+item2
+item3
+<\li>
+<\ul>
 
 # Building steps
 
