@@ -25,4 +25,4 @@ The building process for the AgrImOnIA Dataset follows this order:
 
 # Further developments
 
-The final dataset, already published on Zenodo (link), represents the first step of the AgrImOnIA project. The purpose of this data set is to give the opportunity to assess the impact of agriculture on air quality in Lombardy through statistical techniques capable of highlighting the relationship between the livestock sector and air pollutants concentrations.
+The final dataset, already published on Zenodo ([link](https://zenodo.org/record/6620530#.Y0mG0dfP0Q8)), represents the first step of the AgrImOnIA project. The purpose of this data set is to give the opportunity to assess the impact of agriculture on air quality in Lombardy through statistical techniques capable of highlighting the relationship between the livestock sector and air pollutants concentrations.
