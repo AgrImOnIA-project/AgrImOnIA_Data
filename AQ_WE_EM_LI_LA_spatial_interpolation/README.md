@@ -1,6 +1,6 @@
 # What do these scripts do?
 
-These scripts need to the spatial interpolation step, where a value of each covariates is assigned to each air quality stations localisations thorugh different techniques. This procedure is inside "Spatial Interpolation.R". The other two scripts are functions that manually perform the IDW interpolation. "AQinterp.R" and "AQinterpPARALLEL.R" , as the names suggest, refer to AQ (stations localisations) interpolated with other spatial file (grid, shapefile, ecc.).
+These scripts need to the spatial interpolation step, where a value of each covariates is assigned to each air quality stations localisations thorugh different techniques. This procedure is inside "Spatial Interpolation.R". The other two scripts are functions that manually perform the IDW interpolation for WE and EM data. "AQinterp.R" and "AQinterpPARALLEL.R", as the names suggest, refer to AQ (stations localisations) interpolated with other spatial file (grid, shapefile, ecc.).
 
 # Files
 
