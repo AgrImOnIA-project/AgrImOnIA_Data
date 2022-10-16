@@ -4,4 +4,4 @@ These scripts need to the spatial interpolation step, where a value of each cova
 
 # Files
 
-<ul> <li> <b> AQinterp.R </b> : is the function that interpolate the AQ stations localistations with ERA5 and CAMS grid data. The default method is the IDW with 4 nearest neighbours and power = 1. </li> <li> <b> AQinterpPARALLEL.R </b> is the same function as "AQinterp.R" but with the usage of parallelization technique (raccomanded for cluster or HPC users). </li> <li> <b> Spatial Interpolation.R </b> is the script containing the interpolation procedure between AQ data and every dimensions: WE, EM, LI, LA
+<ul> <li> <b> AQinterp.R </b> : is the function that interpolate the AQ stations localistations with ERA5 and CAMS grid data. The default method is the IDW with 4 nearest neighbours and power = 1. </li> <li> <b> AQinterpPARALLEL.R </b> is the same function as "AQinterp.R" but with the usage of parallelization technique (raccomanded for cluster or HPC users). </li> <li> <b> Spatial Interpolation.R </b> is the script containing the interpolation procedure between AQ data and every dimensions: WE, EM, LI, LA </li> </ul>
