@@ -27,7 +27,7 @@ registerDoParallel(cores = (cores/2))
 registerDoParallel()
 
 
-# YOU NEED THESE FOLDER IN YOUR WORKING DIRECTORY:
+# YOU NEED THESE FOLDERS IN YOUR WORKING DIRECTORY:
 # AQ -> where is stored air quality measurements
 # ERA5/DailyPointsDataframe/2016_2021 -> filled from Weather.R
 # CAMS/DailyPointsDataframe -> filled from Emission.R
