@@ -3,7 +3,7 @@
 The script serves as initial step for the building process of the Agrimonia Dataset, in particular the script is used to download weather data and prepare it for the next steps. First, variables are downloaded from two datasets: ERA5Land and ERA5 Single Level. The two datasets come from the ERA5 reanalysis but
 they differ for the spatial resolution. Indeed, ERA5Land has a better resolution, 0.1° x 0.1° compared to 0.25° x 0.25° of the ERA5 Single Level but it contains less variables and just the land-linked variables. For instance, temparature at 2 meter comes from ERA5 Land while boundary layer height comes from 
 ERA5 Single Level. The default temporal resolution is hourly because when we convert them to daily we can keep the information about the daily maximum or minimum or mode. One variable is not obtained directly from the CDS but is calculated from other variables: relative humidity from the combination of
-the temprature and the dew-point temperature both at 2 meter above the ground. At the end, files ready to be spatially interpolated are generated and they will serve as input for Spatial Interpolation.R
+the temprature and the dew-point temperature both at 2 meter above the ground. At the end, files ready to be spatially interpolated are generated and they will serve as input for Spatial Interpolation.R. The code makes extensive use of parallelisation via the <tt>doParallel</tt> and <tt>foreach</tt> packages.
 
 # Weather.R Structure
 
@@ -30,11 +30,7 @@ To do the temporal transformation, the script uses the function <i>ERA5_Land_fro
 As for the others sections, the temporal transformation process is divided in two subsections, according to the source dataset:
 <ul>
 <li><b>A.2.1. ERA5 Land </b> where the temporal resolution transformation is made for variables from ERA5Land dataset.
-Here is also calculated the relative humidity using the August-Roche-Magnus approximation formula:
-<MATH>
-RH=100⋅exp(\frac{17.625⋅T\index{d}|243.04+T\index{d}}-\frac{17.625⋅T|243.04+T})
-<MATH/>
-where <b>RH</b> is the <i>Relative Humidity</i>, <b>T<sub>d</sub></b> is the dew-point temperature, <b>T</b> is the temperature.</li>
+Here is also calculated the relative humidity using the August-Roche-Magnus approximation formula from the dew-point temperature and the temperature.
 <li><b>A.2.2. ERA5 Single Level</b> where where the temporal resolution transformation is made for variables from ERA5 Single Level dataset</li>
 </ul></li>
 
