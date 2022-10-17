@@ -5,7 +5,7 @@
 # press ->  ctrl + shift + O  <-  to see the structure of the script
 
 # made by Dr. Alessandro Fusta Moro, University of Turin
-# contact me at alessandro.fustamoro@gmail.com
+# contact me at alessandro.fustamoro@gmail.com #
 
 # LIBRARY ####
 library(doParallel)
