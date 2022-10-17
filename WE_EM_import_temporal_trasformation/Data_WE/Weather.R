@@ -25,7 +25,7 @@ registerDoParallel(cores = (cores/2))
 registerDoParallel()
 
 # WORKING DIRECTORY
-# set your working directory as the first folder of the extracted zip
+# set your working directory as the "AgrImOnIA_Data" folder
 old_wd <- getwd() #save the overall working directory (need at the end)
 setwd("WE_EM_import_temporal_trasformation") #set wd inside weather
 
@@ -70,8 +70,8 @@ for(d in dataset){for(y in years){for(b in bound){
 # you must have raw netcdf files downloaded from CDS in section A.0.
 
 source("Functions/ERA5Functions/ERA5netcdftopoints.R") #recall functions
-path_in<-"rawdata/"
-path_out<-"HourlyPointsDataframe/"
+path_in<-"Data_WE/rawdata/"
+path_out<-"Data_WE/HourlyPointsDataframe/"
 dataset<-"Land"
 year<-c(2016:2021)
 region<-"Lombardy"
@@ -90,8 +90,8 @@ foreach (y = year, .packages = "ncdf4") %dopar% {
 # you must have raw netcdf files downloaded from CDS at section A.1.1
 
 source("Functions/ERA5Functions/ERA5netcdftopoints.R") #recall functions
-path_in<-"rawdata/"
-path_out<-"HourlyPointsDataframe/"
+path_in<-"Data_WE/rawdata/"
+path_out<-"Data_WE/HourlyPointsDataframe/"
 dataset<-"Single Levels"
 year<-c(2016:2021)
 region<-"Lombardy"
@@ -110,8 +110,8 @@ foreach (y = year, .packages = "ncdf4") %dopar% {
 # A.2. From hourly to daily ====
 # _ A.2.1. ERA5 Land ####
 source("Functions/ERA5Functions/ERA5_Land_fromHourlytoDaily.R") #recall functions
-path_in<-"ERA5/HourlyPointsDataframe/"
-path_out<-"ERA5/DailyPointsDataframe/"
+path_in<-"Data_WE/HourlyPointsDataframe/"
+path_out<-"Data_WE/DailyPointsDataframe/"
 dataset<-"Land"
 year<-c(2016:2021)
 region<-"Lombardy"
@@ -132,8 +132,8 @@ foreach (y = year) %dopar% {
 
 # _ A.2.2. ERA5 Single Levels ####
 source("Functions/ERA5Functions/ERA5_SL_fromHourlytoDaily.R") #recall functions
-path_in<-"ERA5/HourlyPointsDataframe/"
-path_out<-"ERA5/DailyPointsDataframe/"
+path_in<-"Data_WE/HourlyPointsDataframe/"
+path_out<-"Data_WE/DailyPointsDataframe/"
 dataset<-"Single Levels"
 year<-c(2016:2021)
 region<-"Lombardy"
@@ -154,8 +154,8 @@ foreach (y = year) %dopar% {
 
 # A.3. Merge all datasets across years ====
 # _ A.3.1. ERA5 Land ####
-path_in <- "ERA5/DailyPointsDataframe/"
-path_out <- "ERA5/DailyPointsDataframe/2016_2021/"
+path_in <- "Data_WE/DailyPointsDataframe/"
+path_out <- "Data_WE/DailyPointsDataframe/2016_2021/"
 dataset<-"Land"
 region<-"Lombardy"
 landfiles<-list.files(path = path_in,pattern = dataset)
@@ -172,8 +172,8 @@ rm(landfiles)
 
 
 # _ A.3.2. ERA5 Single Levels####
-path_in <- "ERA5/DailyPointsDataframe/"
-path_out <- "ERA5/DailyPointsDataframe/2016_2021/"
+path_in <- "Data_WE/DailyPointsDataframe/"
+path_out <- "Data_WE/DailyPointsDataframe/2016_2021/"
 region<-"Lombardy"
 #Single Levels
 dataset<-"Single Levels"

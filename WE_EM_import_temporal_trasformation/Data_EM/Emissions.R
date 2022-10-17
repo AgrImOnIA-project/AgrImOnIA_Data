@@ -24,14 +24,21 @@ registerDoParallel(cores = (cores/2))
 # 2. IF YOU HAVE LINUX
 registerDoParallel()
 
+# WORKING DIRECTORY
+# set your working directory as the "AgrImOnIA_Data" folder
+old_wd <- getwd() #save the overall working directory (need at the end)
+setwd("WE_EM_import_temporal_trasformation") #set wd inside weather & emissions
+
 # Emission ----------------------------------------------------------------------
 # B.O. Data Download ====
 
 # 1. you must have an account on Atmosphere Data Store service
-wf_set_key(user = "", # <---- set your userID on ADS
-           key = "", # <---- set your key (if you don't know use "wf_get_key")
+ID <- ""  # <---- copy your userID on Atmosphere Data Store
+key <- wf_get_key(ID,service = "ads")
+wf_set_key(user = ID,
+           key = key,
            service = "ads")
-
+# someone my want to use a cycle, here you have the possibility to change the pollutant or sector across years
 request <- list(
   version = "latest",
   format = "zip",
@@ -41,7 +48,7 @@ request <- list(
   dataset_short_name = "cams-global-emission-inventories",
   target = "download.zip"
 )
-ncfile <- wf_request(user = "9114",
+ncfile <- wf_request(user = ID,
                      request = request,
                      transfer = TRUE,
                      path = "~",
@@ -55,7 +62,7 @@ request <- list(
   dataset_short_name = "cams-global-emission-inventories",
   target = "download.zip"
 )
-ncfile <- wf_request(user = "9114",
+ncfile <- wf_request(user = ID,
                      request = request,
                      transfer = TRUE,
                      path = "~",
@@ -69,7 +76,7 @@ request <- list(
   dataset_short_name = "cams-global-emission-inventories",
   target = "download.zip"
 )
-ncfile <- wf_request(user = "9114",
+ncfile <- wf_request(user = ID,
                      request = request,
                      transfer = TRUE,
                      path = "~",
@@ -83,7 +90,7 @@ request <- list(
   dataset_short_name = "cams-global-emission-inventories",
   target = "download.zip"
 )
-ncfile <- wf_request(user = "9114",
+ncfile <- wf_request(user = ID,
                      request = request,
                      transfer = TRUE,
                      path = "~",
@@ -97,7 +104,7 @@ request <- list(
   dataset_short_name = "cams-global-emission-inventories",
   target = "download.zip"
 )
-ncfile <- wf_request(user = "9114",
+ncfile <- wf_request(user = ID,
                      request = request,
                      transfer = TRUE,
                      path = "~",
@@ -105,19 +112,19 @@ ncfile <- wf_request(user = "9114",
 
 # now in your personal webpage you can find all the request pending
 
-# Extract zip files in the same folder of the project
+# Extract zip files in the folder called "rawdata" inside Data_EM
 
 # B.1. From netcdf to Points Dataframe ====
 # _ B.1.1. ammonia ####
 
-source("FUNCTIONS/getvarCAMS.R")
+source("Functions/CAMSFunctions/getvarCAMS.R")
 B_LO <- c(8.05,11.85,44.35,46.95) #boundary of Lombardy
-# B_LO <- c(54.15, 6.25, 50.95, 11.95)
+# B_LO <- c(54.15, 6.25, 50.95, 11.95) #boundary of Lower Saxony
 region<-"Lombardy"
 # region<-"Lower Saxony"
 path_in<-"CAMS/rawdata/"
 pollutant<-"ammonia"
-dataset<-"CAMS-GLOB-ANT_v4.2"
+dataset<-"CAMS-GLOB-ANT_v4.2" #the name of the dataset GLOBal ANThropogenic
 nc<-nc_open(paste0(path_in,dataset,"_",pollutant,"_",2016,".nc"))
 variables<-names(nc$var)
 delete_variables<-list("date","fef","slv")
@@ -303,8 +310,7 @@ save(cams,file = paste0(path_out,"nh3 nox so2 2016_2020 ",region,".Rdata"))
 rm(cams_nh3,cams_nox,cams_so2,path_in,path_out,dataset)
 gc()
 # B.2. From Monthly to Daily ====
-# _ B.2.1. add last month data (as average of observations of the same period) &
-# transformation units of measure ####
+# _ B.2.1. add last month data & transformation of units of measure
 
 path_in<-"CAMS/MonthlyPointsDataframe/"
 
