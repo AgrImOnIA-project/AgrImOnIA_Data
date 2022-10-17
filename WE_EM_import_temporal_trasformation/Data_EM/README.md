@@ -8,7 +8,7 @@ The script is divided in sections (press Alt + o inside the R console to view it
 <ul>
 
 <li><b>B.0. Data Download </b> makes the request to the Atmosphere Data Store (ADS) for emissions data. For this step you need an account on the <a href="https://atmosphere.copernicus.eu/data">ADS webpage</a>. 
-In this section is possible to make the request for emissions from a large number of pollutants for all the globe. Not all the variables are used. To know which variables are kept in the Agrimonia porject the reader is referred to the Table 3 of the reference paper</li>. Data are downloaded using the package <tt>ncdf4</tt>.
+In this section is possible to make the request for emissions from a large number of pollutants for all the globe. Not all the variables are used. To know which variables are kept in the Agrimonia porject the reader is referred to the Table 3 of the reference paper</li>. Data are downloaded using the package <tt>ecmwfr</tt>.
 
 <li><b>B.1. From netcdf to Points Dataframe</b> transforms the netcdf files obtained from the CDS service in long table of the format <i>x, y, t</i> through the function <i>getvarCAMS.R</i>. Emissions data from netcdf files can be extracted and converted to a long table format (<i>x,y,t</i>) using the <tt>ncdf4</tt> through the function <i>getvarCAMS.R</i>. For the purpose of the project AgrImOnIA we are intersted in ammonia, sulphur dioxide and nitrogen dioxide, the variables selected are listed in the Table 8 of the referring paper.
 The process is made for each variables coming from different files so the section is divided in subsections:
