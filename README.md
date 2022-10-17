@@ -92,6 +92,7 @@ These scripts are used in the AgrImOnIA_Dataset building process. In particular 
   </ul>
 </ul>
 For details about every script the user is referred to the README.md in each folder.
+
 # Building steps
 
 The building process for the AgrImOnIA Dataset follows this order:
