@@ -24,18 +24,23 @@ registerDoParallel(cores = (cores/2))
 # 2. IF YOU HAVE LINUX
 registerDoParallel()
 
+# WORKING DIRECTORY
+# set your working directory as the first folder of the extracted zip
+old_wd <- getwd() #save the overall working directory (need at the end)
+setwd("WE_EM_import_temporal_trasformation") #set wd inside weather
+
+
 # Weather ----------------------------------------------------------------------
 # A.0. Data Download ====
 
 # Some steps are needed before to proceed:
 
-# 1. you must have an account on Climate Data Store service
-# 2. you must have downloaded the folder called "FUNCTIONS" in your working directory
-# 
+# you must have an account on Climate Data Store service
+
 BoundaryLombardy <- c(46.95, 8.05, 44.35, 11.85) # set the box of your interest
 # BoundaryLowerSaxony <- c(54.15, 6.25, 50.95, 11.95)
 id<-"119479" # set the ID of your CDS account
-source("FUNCTIONS/ERA5datadownload.R") #recall function
+source("Functions/ERA5Functions/ERA5datadownload.R") #recall function
 dataset<-c("ERA5Land","ERA5SL")
 years<-c(2016:2021)
 bound<-list(BoundaryLombardy)
@@ -56,16 +61,17 @@ for(d in dataset){for(y in years){for(b in bound){
 #               from 2016 to 2021
 # --> region --> Lombardy 
 
-# IMPORTANT: save your files in a folder named "rawdata" and rename the files
-# according to the year and the dataset (example: ERA5 Land 2017 Lombardia.nc)
+# IMPORTANT: 
+# 1. save your files in the empty folder named "rawdata" 
+# 2. rename the files according to the year and the dataset (example: ERA5 Land 2017 Lombardy.nc)
 
 # A.1. From netcdf to Points Dataframe ====
 # _ A.1.1. ERA5 Land ####
-# you must have raw netcdf files downloaded from CDS at section A.1.1
+# you must have raw netcdf files downloaded from CDS in section A.0.
 
-source("FUNCTIONS/ERA5netcdftopoints.R") #recall functions
-path_in<-"ERA5/rawdata/"
-path_out<-"ERA5/HourlyPointsDataframe/"
+source("Functions/ERA5Functions/ERA5netcdftopoints.R") #recall functions
+path_in<-"rawdata/"
+path_out<-"HourlyPointsDataframe/"
 dataset<-"Land"
 year<-c(2016:2021)
 region<-"Lombardy"
@@ -83,9 +89,9 @@ foreach (y = year, .packages = "ncdf4") %dopar% {
 # _ A.1.2. ERA5 Single Levels ####
 # you must have raw netcdf files downloaded from CDS at section A.1.1
 
-source("FUNCTIONS/ERA5netcdftopoints.R") #recall functions
-path_in<-"ERA5/rawdata/"
-path_out<-"ERA5/HourlyPointsDataframe/"
+source("Functions/ERA5Functions/ERA5netcdftopoints.R") #recall functions
+path_in<-"rawdata/"
+path_out<-"HourlyPointsDataframe/"
 dataset<-"Single Levels"
 year<-c(2016:2021)
 region<-"Lombardy"
@@ -101,9 +107,9 @@ foreach (y = year, .packages = "ncdf4") %dopar% {
                      print=F)}
 
 
-# A.2. From Hourly to Daily ====
+# A.2. From hourly to daily ====
 # _ A.2.1. ERA5 Land ####
-source("FUNCTIONS/ERA5_Land_fromHourlytoDaily.R") #recall functions
+source("Functions/ERA5Functions/ERA5_Land_fromHourlytoDaily.R") #recall functions
 path_in<-"ERA5/HourlyPointsDataframe/"
 path_out<-"ERA5/DailyPointsDataframe/"
 dataset<-"Land"
@@ -125,7 +131,7 @@ foreach (y = year) %dopar% {
 
 
 # _ A.2.2. ERA5 Single Levels ####
-source("FUNCTIONS/ERA5_SL_fromHourlytoDaily.R") #recall functions
+source("Functions/ERA5Functions/ERA5_SL_fromHourlytoDaily.R") #recall functions
 path_in<-"ERA5/HourlyPointsDataframe/"
 path_out<-"ERA5/DailyPointsDataframe/"
 dataset<-"Single Levels"
@@ -184,4 +190,6 @@ SingleLevels$precipitation_type<-as.factor(SingleLevels$precipitation_type)
 save(SingleLevels,file=paste0(path_out,"Daily ",dataset," 2016_2021 ",region,".Rdata"))
 rm(slfiles)
 
+setwd(old_wd)
 gc()
+
