@@ -13,7 +13,7 @@ The script is divided in sections (press Alt + o inside the R console to view it
 
 <li><b>C.1. Loading input files </b> where outputs from other preprocessing steps are called in the environment. This section is disaggregated by dimensions.
 <li><b>C.2. KNN Spatial Interpolation </b> where the grid data are used to assign a value to each air quality stations localisations through the IDW technqiue. Weather data (<b>C.2.1.</b>) and emissions data (<b>C.2.2.</b>). This is done through the function <i>AQinterpPARALLEL.R</i>.
-<li><b>C.3 Interpolation with shapefile and raster </b> where a value of land use (<b>C.3.1.</b>), soil (<b>C.3.2.</b>), altitude(<b>C.3.3.</b>) and livestock (<b>C.3.4.</b>) is assigned to each air quality monitoring stations localisations.
+<li><b>C.3 Interpolation with shapefile and raster </b> where a value of land use (<b>C.3.1.</b>), soil (<b>C.3.2.</b>), altitude(<b>C.3.3.</b>) and livestock (<b>C.3.4.</b>) is assigned to each air quality monitoring stations localisations.</li></ul>
 
 # Files
 
