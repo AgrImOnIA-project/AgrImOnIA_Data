@@ -2,10 +2,19 @@
 # 
 # this script download and merge the emission data for AgrImOnIA Dataset
 # press ->  Alt + o           <-  to collapse all folders
-# press ->  ctrl + shift + O  <-  to see the structure of the script
+# press ->  ctrl + shift + o  <-  to see the structure of the script
 
 # made by Dr. Alessandro Fusta Moro, University of Turin
 # contact me at alessandro.fustamoro@gmail.com
+
+# if you use the script or the data from it please cite as:
+
+# Fassò, Alessandro, Rodeschini, Jacopo, Fusta Moro, Alessandro, 
+# Shaboviq, Qendrim, Maranzano, Paolo, Cameletti, Michela, 
+# Finazzi, Francesco, Golini, Natalia, Ignaccolo, Rosaria,
+# Otto, Philipp. (2022). AgrImOnIA: Open Access dataset correlating
+# livestock and air quality in the Lombardy region, Italy (1.0.0) 
+# [Data set]. Zenodo. https://doi.org/10.5281/zenodo.6620530
 
 # LIBRARY ####
 library(doParallel)
@@ -116,13 +125,12 @@ ncfile <- wf_request(user = ID,
 
 # B.1. From netcdf to Points Dataframe ====
 # _ B.1.1. ammonia ####
-
 source("Functions/CAMSFunctions/getvarCAMS.R")
 B_LO <- c(8.05,11.85,44.35,46.95) #boundary of Lombardy
-# B_LO <- c(54.15, 6.25, 50.95, 11.95) #boundary of Lower Saxony
+# B_LS <- c(54.15, 6.25, 50.95, 11.95) #boundary of Lower Saxony
 region<-"Lombardy"
 # region<-"Lower Saxony"
-path_in<-"CAMS/rawdata/"
+path_in<-"Data_EM/rawdata/"
 pollutant<-"ammonia"
 dataset<-"CAMS-GLOB-ANT_v4.2" #the name of the dataset GLOBal ANThropogenic
 nc<-nc_open(paste0(path_in,dataset,"_",pollutant,"_",2016,".nc"))
@@ -175,15 +183,16 @@ cams_nh3<-foreach (years = 2016:2020,
                                                                  merge(amm_tnr,amm_tro))))))))))
   }
 
-path_out<-"CAMS/MonthlyPointsDataframe/"
+path_out<-"Data_EM/MonthlyPointsDataframe/"
 save(cams_nh3,file=paste0(path_out,pollutant," 2016_2020 ",region,".Rdata"))
 rm(delete_variables,pollutant,variables)
-# _ B.1.2. nitrogen dioxides ####
 
-source("FUNCTIONS/getvarCAMS.R")
+
+# _ B.1.2. nitrogen dioxides ####
+source("Functions/CAMSFunctions/getvarCAMS.R")
 B_LO <- c(8.05,11.85,44.35,46.95) #boundary of Lombardy
 region<-"Lombardy"
-path_in<-"CAMS/rawdata/"
+path_in<-"Data_EM/rawdata/"
 years<-2016
 pollutant<-"nitrogen-oxides"
 nc<-nc_open(paste0(path_in,dataset,"_",pollutant,"_",years,".nc"))
@@ -235,16 +244,16 @@ cams_nox<-foreach (years = 2016:2020,
                                                            merge(nox_swd,
                                                                  merge(nox_tnr,nox_tro))))))))))
   }
-path_out<-"CAMS/MonthlyPointsDataframe/"
+path_out<-"Data_EM/MonthlyPointsDataframe/"
 save(cams_nox,file=paste0(path_out,pollutant," 2016_2020 ",region,".Rdata"))
 rm(delete_variables,pollutant,variables)
 
 # _ B.1.3. sulfur dioxide ####
 
-source("FUNCTIONS/getvarCAMS.R")
+source("Functions/CAMSFunctions/getvarCAMS.R")
 region<-"Lombardy"
 B_LO <- c(8.05,11.85,44.35,46.95) #boundary of Lombardy
-path_in<-"CAMS/rawdata/"
+path_in<-"Data_EM/rawdata/"
 years<-2016
 pollutant<-"sulphur-dioxide"
 dataset<-"CAMS-GLOB-ANT_v4.2"
@@ -291,14 +300,14 @@ cams_so2<-foreach (years = 2016:2020,
                                                merge(so2_swd,
                                                      merge(so2_tnr,so2_tro))))))))
   }
-path_out<-"CAMS/MonthlyPointsDataframe/"
+path_out<-"Data_EM/MonthlyPointsDataframe/"
 save(cams_so2,file=paste0(path_out,pollutant," 2016_2020 ",region,".Rdata"))
 rm(delete_variables,pollutant,variables,path_in,path_out)
 
-# _ B.1.4. merging all emissions ####
 
-path_in <- "CAMS/MonthlyPointsDataframe/"
-path_out <- "CAMS/MonthlyPointsDataframe/"
+# _ B.1.4. merging all emissions ####
+path_in <- "Data_EM/MonthlyPointsDataframe/"
+path_out <- "Data_EM/MonthlyPointsDataframe/"
 region<-"Lombardy"
 # if you don't have cams_nh3 ; cams_nox ; cams_so2 in your environment:
 # load(paste0(path_in,"ammonia 2016_2020 Lombardy.Rdata")
@@ -309,10 +318,11 @@ cams<-merge(cams_nh3,merge(cams_nox,cams_so2))
 save(cams,file = paste0(path_out,"nh3 nox so2 2016_2020 ",region,".Rdata"))
 rm(cams_nh3,cams_nox,cams_so2,path_in,path_out,dataset)
 gc()
+
+
 # B.2. From Monthly to Daily ====
 # _ B.2.1. add last month data & transformation of units of measure
-
-path_in<-"CAMS/MonthlyPointsDataframe/"
+path_in<-"Data_EM/MonthlyPointsDataframe/"
 
 # if you don't have cams in your environment:
 # load(paste0(path_in,"nh3 nox so2 2016_2020 Lombardy.Rdata")) 
@@ -343,16 +353,16 @@ cams_end_df<-foreach (xf = lon, .combine = rbind, .packages = "doParallel") %dop
 
 cams<- rbind(cams,cams_end_df)
 rm(cams_end_df,cams_gen,lat,lon)
-path_out<-"CAMS/MonthlyPointsDataframe/"
+path_out<-"Data_EM/MonthlyPointsDataframe/"
 region<-"Lombardy"
-save(cams,file = paste0(path_out,"nh3 nox so2 2016_2020 ",region," vers2.Rdata"))
+save(cams,file = paste0(path_out,"nh3 nox so2 2016_2020 ",region,"v2.Rdata"))
 
 # _ B.2.2. Hermite spline ----
 
-path_in<-"CAMS/MonthlyPointsDataframe/"
+path_in<-"Data_EM/MonthlyPointsDataframe/"
 
 # if you don't have cams (64233 obs of 14 vars) in your environment:
-# load(paste0(path_in,"nh3 nox so2 2016_2020 Lombardy vers2.Rdata")) 
+# load(paste0(path_in,"nh3 nox so2 2016_2020 Lombardy v2.Rdata")) 
 
 lon<-unique(cams$Lon)
 lat<-unique(cams$Lat)
@@ -383,19 +393,21 @@ cams_daily<-foreach(xf = lon, .combine = rbind, .packages = "doParallel") %dopar
     df_daily <- cbind(df_daily_meta,as.data.frame(d_matr))
   }}
 cams_daily[cams_daily<0]<-0
-path_out<-"CAMS/DailyPointsDataframe/"
+path_out<-"Data_EM/DailyPointsDataframe/"
 region<-"Lombardy"
 save(cams_daily, file = paste0(path_out,"Daily nh3 nox so2 2016_2020 ",region,".Rdata"))
 
 rm(df_days,days,lat,lon,nvar,path_in,path_out,region)
 gc()
+
+
 # _ B.2.3. plot original data VS reconstructed data from spline ----
 
 #original data
-path_in<-"CAMS/MonthlyPointsDataframe/"
-load(paste0(path_in,"nh3 nox so2 2016_2020 Lombardy vers2.Rdata"))
+path_in<-"Data_EM/MonthlyPointsDataframe/"
+load(paste0(path_in,"nh3 nox so2 2016_2020 Lombardy v2.Rdata"))
 # spline data
-path_in<-"CAMS/DailyPointsDataframe/"
+path_in<-"Data_EM/DailyPointsDataframe/"
 load(paste0(path_in,"Daily nh3 nox so2 2016_2020 Lombardy.Rdata"))
 
 lon<-sample(unique(cams$Lon),1)

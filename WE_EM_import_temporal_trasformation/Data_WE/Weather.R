@@ -7,6 +7,15 @@
 # made by Dr. Alessandro Fusta Moro, University of Turin
 # contact me at alessandro.fustamoro@gmail.com #
 
+# if you use the script or the data from it please cite as:
+
+# Fassò, Alessandro, Rodeschini, Jacopo, Fusta Moro, Alessandro, 
+# Shaboviq, Qendrim, Maranzano, Paolo, Cameletti, Michela, 
+# Finazzi, Francesco, Golini, Natalia, Ignaccolo, Rosaria,
+# Otto, Philipp. (2022). AgrImOnIA: Open Access dataset correlating
+# livestock and air quality in the Lombardy region, Italy (1.0.0) 
+# [Data set]. Zenodo. https://doi.org/10.5281/zenodo.6620530
+
 # LIBRARY ####
 library(doParallel)
 library(foreach)
