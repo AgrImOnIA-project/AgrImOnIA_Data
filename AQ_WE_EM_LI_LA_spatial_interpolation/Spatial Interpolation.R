@@ -134,21 +134,21 @@ SIARL17<-raster::raster(paste0(path_in,year,"/w001001.adf"))
 AQ_SIARL17<-cbind(as.data.frame(AQ_meta),
                   as.data.frame(extract(SIARL17,AQ_meta)))
 names(AQ_SIARL17)[4]<-"SIARL"
-AQ_17<-subset(AQ,time<=as.Date("2017-12-31")&time>as.Date("2017-01-01"))
+AQ_17<-subset(AQ,time<=as.Date("2017-12-31")&time>=as.Date("2017-01-01"))
 AQ_SIARL17<-merge(AQ_17,AQ_SIARL17,all.x=T)
 year<-2018
 SIARL18<-raster::raster(paste0(path_in,year,"/w001001.adf"))
 AQ_SIARL18<-cbind(as.data.frame(AQ_meta),
                   as.data.frame(extract(SIARL18,AQ_meta)))
 names(AQ_SIARL18)[4]<-"SIARL"
-AQ_18<-subset(AQ,time<=as.Date("2018-12-31")&time>as.Date("2018-01-01"))
+AQ_18<-subset(AQ,time<=as.Date("2018-12-31")&time>=as.Date("2018-01-01"))
 AQ_SIARL18<-merge(AQ_18,AQ_SIARL18,all.x=T)
 year<-2019
 SIARL19<-raster::raster(paste0(path_in,year,"/w001001.adf"))
 AQ_SIARL19<-cbind(as.data.frame(AQ_meta),
                   as.data.frame(extract(SIARL19,AQ_meta)))
 names(AQ_SIARL19)[4]<-"SIARL"
-AQ_19<-subset(AQ,time<=as.Date("2019-12-31")&time>as.Date("2019-01-01"))
+AQ_19<-subset(AQ,time<=as.Date("2019-12-31")&time>=as.Date("2019-01-01"))
 AQ_SIARL19<-merge(AQ_19,AQ_SIARL19,all.x=T)
 
 AQ_SIARL<-rbind(AQ_SIARL16,AQ_SIARL17,AQ_SIARL18,AQ_SIARL19)
