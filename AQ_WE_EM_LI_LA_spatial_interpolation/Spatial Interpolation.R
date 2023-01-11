@@ -110,12 +110,16 @@ AQ_meta<-unique(AQ[,c(1:3)])
 coordinates(AQ_meta)<-c("Longitude","Latitude")
 crs(AQ_meta)<-("+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0")
 AQ_CLC<-cbind(as.data.frame(AQ_meta),as.data.frame(over(AQ_meta,CLC[,5])))
+AQ_CLC$CODE18[AQ_CLC$IDStations=="STA-CH0011A"]<-"111"
+AQ_CLC$CODE18[AQ_CLC$IDStations=="STA-CH0033A"]<-"211"
+AQ_CLC$CODE18[AQ_CLC$IDStations=="STA-CH0043A"]<-"121"
 path_out<-"MERGED/"
 file = "AQ+CLC"
 save(AQ_CLC,file =paste0(path_out,file,".Rdata"))
 rm(AQ_CLC,AQ_meta,CLC,path_in,path_out,file)
 #
-
+clc_fix <- as.data.frame(cbind(Agrimonia_Dataset[,c(1)],Agrimonia_Dataset$LA_land_use))
+names(clc_fix)<-c("IDStations","LA_land_use")
 # _ C.3.2. SIARL data ####
 
 AQ_meta<-unique(AQ[,c(1:3)]) #from C.1.1 
@@ -136,7 +140,7 @@ AQ_SIARL17<-cbind(as.data.frame(AQ_meta),
 names(AQ_SIARL17)[4]<-"SIARL"
 AQ_17<-subset(AQ,time<=as.Date("2017-12-31")&time>=as.Date("2017-01-01"))
 AQ_SIARL17<-merge(AQ_17,AQ_SIARL17,all.x=T)
-year<-2018
+year<-2018 #watch out beacuse the raster is slightly different from other years
 SIARL18<-raster::raster(paste0(path_in,year,"/w001001.adf"))
 AQ_SIARL18<-cbind(as.data.frame(AQ_meta),
                   as.data.frame(extract(SIARL18,AQ_meta)))
