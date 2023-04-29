@@ -40,7 +40,7 @@ ERA5_Land_fromHourlytoDaily <- function(year,region,dataset,newfile,path_in,path
   # 7-8   vegetation index           fixed daily values (from 01:00)  fd       
   # 9     surface solar radiation    max value (from 01:00)           max
   # 10    surface pressure           simple mean                      sm
-  # 11    total precipitation        cumulative sum                   cs
+  # 11    total precipitation        already cumulative sum           cs
   # 16    relative humidity          min, mean, max                   rh
   daily_values_1<-list()
   for (x in 1:length(lon)) {
@@ -84,7 +84,7 @@ ERA5_Land_fromHourlytoDaily <- function(year,region,dataset,newfile,path_in,path
                daily_values_3[[9]]<-daily_values_4[[9]],
                daily_values_3[[9]]<-c(daily_values_3[[9]],
                                       daily_values_4[[9]]))
-          daily_values_4[[11]]<-sum(sub2[c(daily[d]:(daily[d]+23)),11]) #total precipitation
+          daily_values_4[[11]]<-sub2[(daily[d]+23),11]) #total precipitation
           ifelse(d==1,
                daily_values_3[[11]]<-daily_values_4[[11]],
                daily_values_3[[11]]<-c(daily_values_3[[11]],
