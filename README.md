@@ -4,6 +4,8 @@ The AgrImOnIA dataset is a comprehensive dataset relating air quality and livest
 
 # Repositery overview
 
+![flow_chart agrimonia](https://github.com/AgrImOnIA-project/AgrImOnIA_Data/assets/115169037/644be65a-895b-4bdb-89b8-96a1b2845314)
+
 These scripts are used to build the AgrImOnIA_Dataset v.2.0.2. In particular the repositery contains:
 
 <ul>
