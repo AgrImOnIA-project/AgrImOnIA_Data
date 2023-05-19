@@ -1,3 +1,9 @@
+Air quality data are downloaded from ARPA Lombardy for the Lombardy region while they are downloaded from EEA for the buffer.
+
+# ARPA data download and management
+The script where data from ARPA are downloaded is ARPALData_download_2016_2021.R
+The script where data are managed is ARPA_Hourly_PM10_NH3_DataManagement.R
+
 # EEA Helper function
 > Useful MATLAB function to download, filter and reshape EEA environmental data
 
