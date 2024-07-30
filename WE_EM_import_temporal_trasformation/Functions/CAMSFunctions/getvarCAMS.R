@@ -23,7 +23,7 @@ getvarCAMS<-function(nc,year,boundary,variables){
   end_time <- as.Date(paste0(year,"/12/31"))
   time<-seq(start_time,end_time,by="months")
   for (ln in listnames) {
-    dflist[[ln]]<-data.frame(
+    dflist[[ln]] <- data.frame(
       Lon=rep(x,(length(y)*length(t))),
       Lat=rep(rep(y,each=length(x)),length(t)),
       time=rep(time,each=(length(x)*length(y))),
